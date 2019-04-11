@@ -1,0 +1,7 @@
+{
+	"plugins": ["transform-runtime", "transform-decorators-legacy"],
+	"presets": [
+		"env",
+		"stage-0"
+	]
+}

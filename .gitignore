@@ -1,0 +1,13 @@
+.idea
+.idea/
+.vscode
+.vscode/
+.DS_Store
+node_modules/
+.project
+npm-debug.log
+server/crawler/chrome/
+devDist/
+dist/
+pc_dist/
+yarn.lock

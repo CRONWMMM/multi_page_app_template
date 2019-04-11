@@ -1,0 +1,157 @@
+
+/* origin style reset */
+.btn-reset {
+	border: none;
+	background: none;
+	outline: none;
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.hide{
+	display: none!important;
+}
+
+.full-view {
+	width: 100%;
+	height: 100%;
+}
+
+.position-full {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+}
+
+.bg-default(@size) {
+	background-repeat: no-repeat;
+	background-size: @size;
+	background-position: center center;
+}
+
+.bgc(@color) {
+	background-color: @color;
+}
+
+.line-height(@height) {
+	height: @height;
+	line-height: @height;
+}
+
+.hover-active(@color) {
+	&:hover {
+		cursor: pointer;
+		color: @color;
+	}
+}
+
+.btn-radius {
+	.line-height(40px);
+	display: inline-block;
+	padding: 0 20px;
+	color: @link-color;
+	border: 1px solid @link-color; /* no */
+	border-radius: 20px; /* no */
+}
+.btn-primary {
+	.line-height(55px);
+	.bgc(@link-color);
+	width: 150px;
+	color: white;
+	text-align: center;
+	transition: background-color 0.1s linear, color 0.1s linear,  border-color 0.1s linear;
+	&:hover {
+		.bgc(@hover-color);
+		border-color: @hover-color;
+		cursor: pointer;
+	}
+}
+.btn-ghost {
+	.line-height(55px);
+	min-width: 150px;
+	border: 1px solid @border-color-light; /* no */
+	text-align: center;
+	transition: background-color 0.1s linear, color 0.1s linear;
+	&:hover, &.active {
+		color: white;
+		cursor: pointer;
+	}
+	&.active {
+		.bgc(@primary-color);
+		border-color: @primary-color;
+	}
+	&:hover {
+		.bgc(@hover-color);
+		border-color: @hover-color;
+	}
+}
+.btn-text {
+	color: @primary-color;
+	transition: color 0.1s linear;
+	&:hover {
+		cursor: pointer;
+		color: @hover-color;
+	}
+}
+
+.clear-f {
+	&:after{
+		content: '';
+		display: block;
+		height: 0;
+		visibility: hidden;
+		clear: both;
+	}
+}
+.scrollBar {
+	&::-webkit-scrollbar {/*滚动条整体样式*/
+		width: 6px;     /*高宽分别对应横竖滚动条的尺寸*/
+		height: 6px;
+	}
+	&::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+		border-radius: 6px; /* no */
+		-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+		background: rgba(0,0,0,0.2);
+	}
+	&::-webkit-scrollbar-track {/*滚动条里面轨道*/
+		-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+		border-radius: 0; /* no */
+		background: rgba(0,0,0,0.1);
+	}
+}
+
+.ellipsis{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.flex-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.trans-vertical-center{
+	position: absolute;
+	top: 50%;
+	transform: transLateY(-50%);
+}
+
+.trans-horizontal-center{
+	position: absolute;
+	left: 50%;
+	transform: transLateX(-50%);
+}
+
+.trans-center{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: transLate(-50%,-50%);
+}
+
+.opacity0 {opacity: 0}
