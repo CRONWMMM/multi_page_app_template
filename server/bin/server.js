@@ -15,11 +15,7 @@ let port = 8088
 		overlay: true
 	}))
 
-	app.use(express.static(path.resolve(__dirname, '../../src')))
-
-	// 设置模板访问路径和模板引擎
-	app.set('views', path.join(__dirname, '../../devDist/views'))
-	app.set('views engine', 'html')
+	app.use(webpackConfig.output.publicPath, express.static(path.resolve(__dirname, '../../src')))
 
 	// 构造路由
 	routerFactory(app)

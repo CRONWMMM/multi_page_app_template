@@ -9,10 +9,6 @@ const glob = require('glob')
 const webpackBaseConfig = require('./webpack.base.config')
 
 module.exports = webpackMerge(webpackBaseConfig, {
-	output: {
-		path: path.resolve(__dirname, '../devDist')
-	},
-
 	module: {
 		rules: [
 			{
@@ -48,29 +44,10 @@ module.exports = webpackMerge(webpackBaseConfig, {
 			filename: 'css/[name].min.css'
 		}),
 
-		/**
-		 * 打包文件入口
-		 */
-		...glob.sync(path.resolve(__dirname, '../src/tpls/*.html')).map((filepath, i) => {
-			const tempList = filepath.split(/[\/|\/\/|\\|\\\\]/g) // eslint-disable-line
-			const filename = `views/${tempList[tempList.length - 1].replace(/\.html/g, '.ejs')}`
-			const template = filepath
-			const fileChunk = filename.split('.')[0].split(/[\/|\/\/|\\|\\\\]/g).pop() // eslint-disable-line
-			const chunks = ['manifest', 'vendors', fileChunk]
-			return new HtmlWebpackPlugin({ filename, template, chunks, alwaysWriteToDisk: true })
-		}),
-
-		/**
-		 * 打包 ejs includes 公共文件
-		 */
-		...glob.sync(path.resolve(__dirname, '../src/tpls/includes/*.html')).map((filepath, i) => {
-			const tempList = filepath.split(/[\/|\/\/|\\|\\\\]/g) // eslint-disable-line
-			const filename = `views/includes/${tempList[tempList.length - 1].replace(/\.html/g, '.ejs')}`
-			const template = filepath
-			return new HtmlWebpackPlugin({ filename, template, inject: false, alwaysWriteToDisk: true })
-		}),
-
-		new HtmlWebpackHardDiskPlugin()
+		new HtmlWebpackPlugin({
+			template: path.resolve(__dirname, '../src/tpls/index.ejs'),
+			filename: 'index.ejs'
+		})
 	],
 
 	devtool: 'source-map',

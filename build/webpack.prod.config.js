@@ -55,20 +55,9 @@ module.exports = webpackMerge(webpackBaseConfig, {
 		}),
 		*/
 
-		...glob.sync(path.resolve(__dirname, '../src/tpls/*.html')).map((filepath, i) => {
-			const tempList = filepath.split(/[\/|\/\/|\\|\\\\]/g) // eslint-disable-line
-			const filename = `views/${tempList[tempList.length - 1]}`
-			const template = filepath
-			const fileChunk = filename.split('.')[0].split(/[\/|\/\/|\\|\\\\]/g).pop() // eslint-disable-line
-			const chunks = ['manifest', 'vendors', fileChunk]
-			return new HtmlWebpackPlugin({ filename, template, chunks })
-		}),
-
-		...glob.sync(path.resolve(__dirname, '../src/tpls/includes/*.html')).map((filepath, i) => {
-			const tempList = filepath.split(/[\/|\/\/|\\|\\\\]/g) // eslint-disable-line
-			const filename = `views/includes/${tempList[tempList.length - 1]}`
-			const template = filepath
-			return new HtmlWebpackPlugin({ filename, template, inject: false })
+		new HtmlWebpackPlugin({
+			template: path.resolve(__dirname, '../src/tpls/index.ejs'),
+			filename: 'index.ejs'
 		})
 
 		/*

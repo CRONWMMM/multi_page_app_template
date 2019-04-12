@@ -17,7 +17,7 @@ module.exports = {
 
     output: {
         path: resolve(__dirname, '../dist'),
-        publicPath: '/public/',
+        publicPath: '/public',
         filename: 'js/[name].bundle.js',
         chunkFilename: 'js/[name].chunk.js'
     },
@@ -82,6 +82,17 @@ module.exports = {
 						loader: 'html-loader',
 						options: {
 							attrs: ['img:src', 'img:data-src', ':data-background']
+						}
+					}
+				]
+			},
+			{
+				test: /\.ejs$/,
+				use: [
+					{
+						loader: 'ejs-webpack-loader',
+						options: {
+							htmlmin: process.env.NODE_ENV === 'production'
 						}
 					}
 				]
