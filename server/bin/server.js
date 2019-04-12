@@ -11,7 +11,8 @@ let port = 8088
 ;(async app => {
 	// 用 webpack-dev-middleware
 	app.use(webpackMiddleware(compiler, {
-		publicPath: webpackConfig.output.publicPath
+		publicPath: webpackConfig.output.publicPath,
+		overlay: true
 	}))
 
 	app.use(express.static(path.resolve(__dirname, '../../src')))
