@@ -4,6 +4,7 @@ const OptimizeCss = require('optimize-css-assets-webpack-plugin')
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const glob = require('glob')
+const CONFIG = require('./config')
 
 const webpackBaseConfig = require('./webpack.base.config')
 
@@ -40,7 +41,7 @@ module.exports = webpackMerge(webpackBaseConfig, {
 
 	plugins: [
 		new ExtractTextWebpackPlugin({
-			filename: 'css/[name].[hash].css'
+			filename: `${CONFIG.DIR.STYLE}/[name].min.css`
 		}),
 
 		new OptimizeCss(),
@@ -55,31 +56,18 @@ module.exports = webpackMerge(webpackBaseConfig, {
 		}),
 		*/
 
-		new HtmlWebpackPlugin({
-			template: path.resolve(__dirname, '../src/tpls/index.ejs'),
-			filename: 'index.ejs'
+		// 打包文件
+		...glob.sync(path.resolve(__dirname, '../src/tpls/*.ejs')).map((filepath, i) => {
+			const tempList = filepath.split(/[\/|\/\/|\\|\\\\]/g) // eslint-disable-line
+			const filename = `${CONFIG.DIR.VIEW}/${tempList[tempList.length - 1]}`
+			const template = filepath
+			const fileChunk = filename.split('.')[0].split(/[\/|\/\/|\\|\\\\]/g).pop() // eslint-disable-line
+			const chunks = ['manifest', 'vendors', fileChunk]
+			return new HtmlWebpackPlugin({ filename, template, chunks })
 		})
-
-		/*
-		new HtmlWebpackPlugin({
-			filename: 'views/index.ejs',
-			template: path.resolve(__dirname, '../src/tpls/index.html'),
-			chunks: ['index', 'manifest', 'vendors']
-		})
-		*/
 	],
 
 	optimization: {
-		// minimize: false,
-		// minimizer: [
-		// new UglifyJs({
-		// 		uglifyOptions: {
-		// 			ecma: 6,
-		// 			cache: true,
-		// 			parallel: true
-		// 		}
-		// 	})
-		// ],
 		splitChunks: {
 			cacheGroups: {
 				vendors: {

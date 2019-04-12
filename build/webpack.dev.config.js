@@ -2,9 +2,8 @@ const path = require('path')
 const webpackMerge = require('webpack-merge')
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-// 将 HtmlWebpackPlugin 生成的 ejs 文件打包到硬盘，其他资源文件留在缓存里访问
-const HtmlWebpackHardDiskPlugin = require('html-webpack-harddisk-plugin')
 const glob = require('glob')
+const CONFIG = require('./config')
 
 const webpackBaseConfig = require('./webpack.base.config')
 
@@ -41,12 +40,17 @@ module.exports = webpackMerge(webpackBaseConfig, {
 
 	plugins: [
 		new ExtractTextWebpackPlugin({
-			filename: 'css/[name].min.css'
+			filename: `${CONFIG.DIR.STYLE}/[name].min.css`
 		}),
 
-		new HtmlWebpackPlugin({
-			template: path.resolve(__dirname, '../src/tpls/index.ejs'),
-			filename: 'index.ejs'
+		// 打包文件
+		...glob.sync(path.resolve(__dirname, '../src/tpls/*.ejs')).map((filepath, i) => {
+			const tempList = filepath.split(/[\/|\/\/|\\|\\\\]/g) // eslint-disable-line
+			const filename = `${CONFIG.DIR.VIEW}/${tempList[tempList.length - 1]}`
+			const template = filepath
+			const fileChunk = filename.split('.')[0].split(/[\/|\/\/|\\|\\\\]/g).pop() // eslint-disable-line
+			const chunks = ['manifest', 'vendors', fileChunk]
+			return new HtmlWebpackPlugin({ filename, template, chunks })
 		})
 	],
 

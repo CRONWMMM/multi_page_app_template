@@ -1,10 +1,9 @@
 const axios = require('axios')
-const fs = require('fs')
-const path = require('path')
+const CONFIG = require('../../build/config')
 
 function getTemplate (filename) {
 	return new Promise((resolve, reject) => {
-		axios.get(`http://localhost:8088/public/${filename}`)
+		axios.get(`http://localhost:${CONFIG.PORT}/${CONFIG.PATH.PUBLIC_PATH}/${CONFIG.DIR.VIEW}/${filename}`)
 			.then(res => {
 				resolve(res.data)
 			})

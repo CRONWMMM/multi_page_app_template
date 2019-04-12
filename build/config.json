@@ -1,0 +1,14 @@
+{
+	"PORT": 8888,
+	"PATH": {
+		"PUBLIC_PATH": "public"
+	},
+	"DIR": {
+		"DIST": "dist",
+		"VIEW": "views",
+		"STYLE": "css",
+		"SCRIPT": "js",
+		"FONT": "fonts",
+		"IMAGE": "imgs"
+	}
+}

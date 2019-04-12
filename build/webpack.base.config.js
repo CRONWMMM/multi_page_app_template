@@ -1,6 +1,7 @@
 const Webpack = require('Webpack')
 const glob = require('glob')
 const { resolve } = require('path')
+const CONFIG = require('./config')
 
 const entry = ((filepathList) => {
 	let entry = {}
@@ -16,10 +17,10 @@ module.exports = {
 	entry,
 
     output: {
-        path: resolve(__dirname, '../dist'),
-        publicPath: '/public',
-        filename: 'js/[name].bundle.js',
-        chunkFilename: 'js/[name].chunk.js'
+        path: resolve(__dirname, `../${CONFIG.DIR.DIST}`),
+        publicPath: `/${CONFIG.PATH.PUBLIC_PATH}`,
+        filename: `${CONFIG.DIR.SCRIPT}/[name].bundle.js`,
+        chunkFilename: `${CONFIG.DIR.SCRIPT}/[name].chunk.js`
     },
 
 	resolve: {
@@ -47,7 +48,7 @@ module.exports = {
 						options: {
 							name: '[name].[hash:5].[ext]',
 							limit: 10000,
-							outputPath: 'imgs/'
+							outputPath: `${CONFIG.DIR.IMAGE}/`
 						}
 					},
 					{
@@ -67,7 +68,7 @@ module.exports = {
 					{
 						loader: 'file-loader',
 						options: {
-							outputPath: 'fonts/'
+							outputPath: `${CONFIG.DIR.FONT}/`
 						}
 					},
 					{
