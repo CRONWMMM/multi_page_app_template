@@ -47,7 +47,7 @@ module.exports = {
 						loader: 'url-loader',
 						options: {
 							name: '[name].[hash:5].[ext]',
-							limit: 10000,
+							limit: 1000,
 							outputPath: `${CONFIG.DIR.IMAGE}/`
 						}
 					},
@@ -91,9 +91,15 @@ module.exports = {
 				test: /\.ejs$/,
 				use: [
 					{
-						loader: 'ejs-webpack-loader',
+						loader: 'html-loader',
 						options: {
-							htmlmin: process.env.NODE_ENV === 'production'
+							attrs: ['img:src', 'img:data-src', ':data-background']
+						}
+					},
+					{
+						loader: 'ejs-html-loader',
+						options: {
+							production: process.env.ENV === 'production'
 						}
 					}
 				]
