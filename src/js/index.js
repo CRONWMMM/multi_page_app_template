@@ -1,19 +1,18 @@
 // styles
 import 'less/index.less'
 
-async function a () {
-	let res = await b()
+async function welcome () {
+	let res = await sayHello()
 	console.log(res)
 }
 
-function b () {
+function sayHello () {
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
-			resolve('hello')
-		}, 3000)
+			resolve('hello worldddddd')
+		}, 2000)
 	})
 }
 
-a()
+welcome()
 
-console.log('sdasdf'.includes('s'))

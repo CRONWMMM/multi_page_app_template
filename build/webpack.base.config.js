@@ -8,7 +8,8 @@ const entry = ((filepathList) => {
 	filepathList.forEach(filepath => {
 		const list = filepath.split(/[\/|\/\/|\\|\\\\]/g) // eslint-disable-line
 		const key = list[list.length - 1].replace(/\.js/g, '')
-		entry[key] = filepath
+		// 如果是开发环境，才需要引入 hot module
+		entry[key] = process.env.NODE_ENV === 'development' ? [filepath, 'webpack-hot-middleware/client'] : filepath
 	})
 	return entry
 })(glob.sync(resolve(__dirname, '../src/js/*.js')))
@@ -28,7 +29,7 @@ module.exports = {
     		'@': resolve(__dirname, '../src'),
             js: resolve(__dirname, '../src/js'),
             css: resolve(__dirname, '../src/css'),
-            less: resolve(__dirname, '../src/less')
+			less: resolve(__dirname, '../src/less')
 		}
 	},
 

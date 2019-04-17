@@ -1,7 +1,8 @@
 const path = require('path')
 const express = require('express')
 const webpack = require('webpack')
-const webpackMiddleware = require('webpack-dev-middleware')
+const webpackDevMiddleware = require('webpack-dev-middleware')
+const webpackHotMiddleware = require('webpack-hot-middleware')
 const { routerFactory } = require('../routes')
 const CONFIG = require('../../build/config')
 const port = CONFIG.PORT
@@ -10,10 +11,18 @@ let webpackConfig = require('../../build/webpack.dev.config')
 let compiler = webpack(webpackConfig)
 
 ;(async app => {
-	// 用 webpack-dev-middleware
-	app.use(webpackMiddleware(compiler, {
+	// 用 webpack-dev-middleware 启动 webpack 编译
+	app.use(webpackDevMiddleware(compiler, {
 		publicPath: webpackConfig.output.publicPath,
-		overlay: true
+		overlay: true,
+		hot: true
+	}))
+
+	// 使用 webpack-hot-middleware 支持热更新
+	app.use(webpackHotMiddleware(compiler, {
+		publicPath: webpackConfig.output.publicPath,
+		reload: true,
+		noInfo: true
 	}))
 
 	app.use(webpackConfig.output.publicPath, express.static(path.resolve(__dirname, '../../src')))
