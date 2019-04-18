@@ -19,7 +19,7 @@
 
 #### 参与贡献
 
-喜欢的话给个 Star，多谢多谢~😃😃，如果有问题提到 issue 里我来修复~
+喜欢的话给个 Star，多谢多谢 😃😃，如果有问题提到 issue 里我来修复~
 
 #### 相关细节以及更多注意事项
 [传送门](https://github.com/CRONWMMM/multi_page_app_template)
