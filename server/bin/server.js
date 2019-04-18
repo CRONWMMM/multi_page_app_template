@@ -21,7 +21,6 @@ let compiler = webpack(webpackConfig)
 	// 使用 webpack-hot-middleware 支持热更新
 	app.use(webpackHotMiddleware(compiler, {
 		publicPath: webpackConfig.output.publicPath,
-		reload: true,
 		noInfo: true
 	}))
 

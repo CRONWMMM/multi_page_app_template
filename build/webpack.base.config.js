@@ -9,7 +9,7 @@ const entry = ((filepathList) => {
 		const list = filepath.split(/[\/|\/\/|\\|\\\\]/g) // eslint-disable-line
 		const key = list[list.length - 1].replace(/\.js/g, '')
 		// 如果是开发环境，才需要引入 hot module
-		entry[key] = process.env.NODE_ENV === 'development' ? [filepath, 'webpack-hot-middleware/client'] : filepath
+		entry[key] = process.env.NODE_ENV === 'development' ? [filepath, 'webpack-hot-middleware/client?reload=true'] : filepath
 	})
 	return entry
 })(glob.sync(resolve(__dirname, '../src/js/*.js')))
@@ -17,18 +17,18 @@ const entry = ((filepathList) => {
 module.exports = {
 	entry,
 
-    output: {
-        path: resolve(__dirname, `../${CONFIG.DIR.DIST}`),
-        publicPath: `/${CONFIG.PATH.PUBLIC_PATH}`,
-        filename: `${CONFIG.DIR.SCRIPT}/[name].bundle.js`,
-        chunkFilename: `${CONFIG.DIR.SCRIPT}/[name].chunk.js`
-    },
+	output: {
+		path: resolve(__dirname, `../${CONFIG.DIR.DIST}`),
+		publicPath: `/${CONFIG.PATH.PUBLIC_PATH}`,
+		filename: `${CONFIG.DIR.SCRIPT}/[name].bundle.js`,
+		chunkFilename: `${CONFIG.DIR.SCRIPT}/[name].chunk.js`
+	},
 
 	resolve: {
-    	alias: {
-    		'@': resolve(__dirname, '../src'),
-            js: resolve(__dirname, '../src/js'),
-            css: resolve(__dirname, '../src/css'),
+		alias: {
+			'@': resolve(__dirname, '../src'),
+			js: resolve(__dirname, '../src/js'),
+			css: resolve(__dirname, '../src/css'),
 			less: resolve(__dirname, '../src/less')
 		}
 	},
