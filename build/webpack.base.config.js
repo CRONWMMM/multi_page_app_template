@@ -1,4 +1,5 @@
 const Webpack = require('Webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const glob = require('glob')
 const { resolve } = require('path')
 const CONFIG = require('./config')
@@ -111,6 +112,15 @@ module.exports = {
 	plugins: [
 		new Webpack.ProvidePlugin({
 			$: 'jquery'
+		}),
+		// 打包文件
+		...glob.sync(resolve(__dirname, '../src/tpls/*.ejs')).map((filepath, i) => {
+			const tempList = filepath.split(/[\/|\/\/|\\|\\\\]/g) // eslint-disable-line
+			const filename = `${CONFIG.DIR.VIEW}/${tempList[tempList.length - 1]}`
+			const template = filepath
+			const fileChunk = filename.split('.')[0].split(/[\/|\/\/|\\|\\\\]/g).pop() // eslint-disable-line
+			const chunks = ['manifest', 'vendors', fileChunk]
+			return new HtmlWebpackPlugin({ filename, template, chunks })
 		})
 	]
 }
