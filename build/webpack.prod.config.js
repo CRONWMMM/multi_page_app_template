@@ -31,7 +31,7 @@ module.exports = webpackMerge(webpackBaseConfig, {
 								]
 							}
 						},
-						'px2rem-loader?remUnit=192',
+						// 'px2rem-loader?remUnit=192',
 						'less-loader'
 					]
 				})
