@@ -1,4 +1,4 @@
-const Webpack = require('webpack')
+const webpack = require('webpack')
 const webpackMerge = require('webpack-merge')
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
 const CONFIG = require('./config')
@@ -20,14 +20,17 @@ module.exports = webpackMerge(webpackBaseConfig, {
 	},
 
 	plugins: [
+		new webpack.DefinePlugin({
+			'process.env.NODE_ENV': JSON.stringify('development')
+		}),
 		new ExtractTextWebpackPlugin({
 			filename: `${CONFIG.DIR.STYLE}/[name].min.css`
 		}),
 		// OccurrenceOrderPlugin is needed for webpack 1.x only
-		new Webpack.optimize.OccurrenceOrderPlugin(),
-		new Webpack.HotModuleReplacementPlugin(),
+		new webpack.optimize.OccurrenceOrderPlugin(),
+		new webpack.HotModuleReplacementPlugin(),
 		// Use NoErrorsPlugin for webpack 1.x
-		new Webpack.NoEmitOnErrorsPlugin()
+		new webpack.NoEmitOnErrorsPlugin()
 	],
 
 	devtool: 'source-map',

@@ -1,4 +1,4 @@
-const Webpack = require('Webpack')
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const glob = require('glob')
 const { resolve } = require('path')
@@ -109,7 +109,7 @@ module.exports = {
 	},
 
 	plugins: [
-		new Webpack.ProvidePlugin({
+		new webpack.ProvidePlugin({
 			$: 'jquery'
 		}),
 		// 打包文件

@@ -1,3 +1,4 @@
+const webpack = require('webpack')
 const webpackMerge = require('webpack-merge')
 const OptimizeCss = require('optimize-css-assets-webpack-plugin')
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
@@ -37,11 +38,15 @@ module.exports = webpackMerge(webpackBaseConfig, {
 	},
 
 	plugins: [
+		new webpack.DefinePlugin({
+			'process.env.NODE_ENV': JSON.stringify('production')
+		}),
+
 		new ExtractTextWebpackPlugin({
 			filename: `${CONFIG.DIR.STYLE}/[name].min.css`
 		}),
 
-		new OptimizeCss(),
+		new OptimizeCss()
 
 		// css tree-shaking ( css tree-shaking 会移除没有使用到的 css 样式，如果有按时机使用样式类的情况，不推荐用 tree-shaking )
 		/*
