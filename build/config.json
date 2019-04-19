@@ -1,7 +1,7 @@
 {
 	"PORT": 8888,
 	"PATH": {
-		"PUBLIC_PATH": "public"
+		"PUBLIC_PATH": "/public/"
 	},
 	"DIR": {
 		"DIST": "dist",

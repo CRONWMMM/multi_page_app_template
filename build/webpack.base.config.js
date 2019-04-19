@@ -3,24 +3,23 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const glob = require('glob')
 const { resolve } = require('path')
 const CONFIG = require('./config')
-
-const entry = ((filepathList) => {
-	let entry = {}
-	filepathList.forEach(filepath => {
-		const list = filepath.split(/[\/|\/\/|\\|\\\\]/g) // eslint-disable-line
-		const key = list[list.length - 1].replace(/\.js/g, '')
-		// 如果是开发环境，才需要引入 hot module
-		entry[key] = process.env.NODE_ENV === 'development' ? [filepath, 'webpack-hot-middleware/client?reload=true'] : filepath
-	})
-	return entry
-})(glob.sync(resolve(__dirname, '../src/js/*.js')))
+const isDev = process.env.NODE_ENV === 'development'
 
 module.exports = {
-	entry,
+	entry: ((filepathList) => {
+		let entry = {}
+		filepathList.forEach(filepath => {
+			const list = filepath.split(/[\/|\/\/|\\|\\\\]/g) // eslint-disable-line
+			const key = list[list.length - 1].replace(/\.js/g, '')
+			// 如果是开发环境，才需要引入 hot module
+			entry[key] = isDev ? [filepath, 'webpack-hot-middleware/client?reload=true'] : filepath
+		})
+		return entry
+	})(glob.sync(resolve(__dirname, '../src/js/*.js'))),
 
 	output: {
 		path: resolve(__dirname, `../${CONFIG.DIR.DIST}`),
-		publicPath: `/${CONFIG.PATH.PUBLIC_PATH}`,
+		publicPath: CONFIG.PATH.PUBLIC_PATH,
 		filename: `${CONFIG.DIR.SCRIPT}/[name].bundle.js`,
 		chunkFilename: `${CONFIG.DIR.SCRIPT}/[name].chunk.js`
 	},
@@ -50,7 +49,7 @@ module.exports = {
 						options: {
 							name: '[name].[hash:5].[ext]',
 							limit: 1000,
-							outputPath: `${CONFIG.DIR.IMAGE}/`
+							outputPath: CONFIG.DIR.IMAGE
 						}
 					},
 					{
@@ -58,7 +57,7 @@ module.exports = {
 						options: {
 							disable: process.env.NODE_ENV !== 'production',
 							pngquant: {
-								quality: '10'
+								quality: '80'
 							}
 						}
 					}
@@ -70,7 +69,7 @@ module.exports = {
 					{
 						loader: 'file-loader',
 						options: {
-							outputPath: `${CONFIG.DIR.FONT}/`
+							outputPath: CONFIG.DIR.FONT
 						}
 					},
 					{
