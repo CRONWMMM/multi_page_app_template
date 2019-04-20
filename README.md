@@ -16,6 +16,7 @@ webpack4 + ejs + express 服务端渲染多页应用项目架构
 2. 开发环境：`npm run dev` 浏览器访问 `http://localhost:8888`
 3. 打包构建：`npm run build`
 4. 生产环境：`npm run server`
+5. 一键部署：`npm run deploy`
 
 #### 功能介绍：
 1. 基于 `ejs` 模板语言开发，支持服务端渲染。

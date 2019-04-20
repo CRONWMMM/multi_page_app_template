@@ -5,6 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"clear": "rimraf dist",
+		"deploy": "npm run build && npm run server",
 		"server": "cross-env NODE_ENV=production node ./server/bin/server.js",
 		"dev": "cross-env NODE_ENV=development nodemon --watch server ./server/bin/server.js",
 		"build": "npm run clear && cross-env NODE_ENV=production webpack --env production --config ./build/webpack.prod.config.js",

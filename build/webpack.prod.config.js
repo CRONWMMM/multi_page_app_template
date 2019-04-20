@@ -19,7 +19,12 @@ module.exports = webpackMerge(webpackBaseConfig, {
 						}
 					},
 					use: [
-						'css-loader',
+						{
+							loader: 'css-loader',
+							options: {
+								importLoaders: 2
+							}
+						},
 						{
 							loader: 'postcss-loader',
 							options: {
@@ -29,7 +34,6 @@ module.exports = webpackMerge(webpackBaseConfig, {
 								]
 							}
 						},
-						// 'px2rem-loader?remUnit=192',
 						'less-loader'
 					]
 				})
@@ -47,16 +51,6 @@ module.exports = webpackMerge(webpackBaseConfig, {
 		}),
 
 		new OptimizeCss()
-
-		// css tree-shaking ( css tree-shaking 会移除没有使用到的 css 样式，如果有按时机使用样式类的情况，不推荐用 tree-shaking )
-		/*
-		new PurifyCss({
-			paths: globAll.sync([
-				path.join(__dirname, '../src/tpls/*.html'),
-				path.join(__dirname, '../src/js/*.js')
-			])
-		}),
-		*/
 	],
 
 	optimization: {
@@ -83,7 +77,7 @@ module.exports = webpackMerge(webpackBaseConfig, {
 		}
 	},
 
-	devtool: false,
+	devtool: 'cheap-module-source-map',
 
 	mode: 'production'
 })
