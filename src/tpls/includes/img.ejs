@@ -1,0 +1,10 @@
+<!--
+	这块专门用来做 includes 文件中的图片引入展示
+ 	由于最后 includes 文件会被拼接到主文件中，然后再丢给 html-loader 解析
+ 	所以这块的图片路径需要写主文件下的相对路径，不然就找不到图片
+ -->
+<div class="logo-wrap">
+	<img class="logo webpack-logo" src="../static/imgs/webpack.png" alt="webpack logo">
+	<span>+</span>
+	<img class="logo node-logo" src="../static/imgs/node.png" alt="node logo">
+</div>
