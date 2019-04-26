@@ -43,7 +43,7 @@ module.exports = webpackMerge(webpackBaseConfig, {
 		new webpack.NoEmitOnErrorsPlugin()
 	],
 
-	devtool: 'source-map',
+	devtool: 'cheap-module-eval-source-map',
 
 	mode: 'development'
 })

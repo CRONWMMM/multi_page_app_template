@@ -21,7 +21,7 @@ module.exports = {
 		path: resolve(__dirname, `../${CONFIG.DIR.DIST}`),
 		publicPath: CONFIG.PATH.PUBLIC_PATH,
 		filename: `${CONFIG.DIR.SCRIPT}/[name].bundle.js`,
-		chunkFilename: `${CONFIG.DIR.SCRIPT}/[name].chunk.js`
+		chunkFilename: `${CONFIG.DIR.SCRIPT}/[name].[chunkhash].js`
 	},
 
 	resolve: {
@@ -39,7 +39,6 @@ module.exports = {
 				test: /\.js$/,
 				use: 'babel-loader',
 				exclude: /(node_modules|lib|libs)/
-				// include: []
 			},
 			{
 				test: /\.(png|jpg|jpeg|gif)$/,
