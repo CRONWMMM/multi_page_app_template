@@ -117,7 +117,7 @@ module.exports = {
 			const filename = `${CONFIG.DIR.VIEW}/${tempList[tempList.length - 1]}`
 			const template = filepath
 			const fileChunk = filename.split('.')[0].split(/[\/|\/\/|\\|\\\\]/g).pop() // eslint-disable-line
-			const chunks = ['manifest', 'vendors', fileChunk]
+			const chunks = isDev ? fileChunk : ['manifest', 'vendors', fileChunk]
 			return new HtmlWebpackPlugin({ filename, template, chunks })
 		})
 	]

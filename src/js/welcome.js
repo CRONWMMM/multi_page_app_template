@@ -16,6 +16,7 @@ if (module.hot) {
 	 * 这种热更新方式需要注意：
 	 * 1. 如果你在元素上之前绑定了事件，那么热更新之后，这些事件可能会失效
 	 * 2. 如果事件在模块卸载之前未销毁，可能会导致内存泄漏
+	 * 3. 上述两个问题的解决方式，可以在 document.body 内容替换之前，将事件手动解绑。
 	 */
 	module.hot.dispose(() => {
 		const href = window.location.href

@@ -14,9 +14,7 @@ let compiler = webpack(webpackConfig)
 if (isDev) {
 	// 用 webpack-dev-middleware 启动 webpack 编译
 	app.use(webpackDevMiddleware(compiler, {
-		publicPath: webpackConfig.output.publicPath,
-		overlay: true,
-		hot: true
+		publicPath: webpackConfig.output.publicPath
 	}))
 
 // 使用 webpack-hot-middleware 支持热更新
