@@ -112,12 +112,12 @@ module.exports = {
 			$: 'jquery'
 		}),
 		// 打包文件
-		...glob.sync(resolve(__dirname, '../src/tpls/*.ejs')).map((filepath, i) => {
+		...glob.sync(resolve(__dirname, '../src/views/*.ejs')).map((filepath, i) => {
 			const tempList = filepath.split(/[\/|\/\/|\\|\\\\]/g) // eslint-disable-line
 			const filename = `${CONFIG.DIR.VIEW}/${tempList[tempList.length - 1]}`
 			const template = filepath
 			const fileChunk = filename.split('.')[0].split(/[\/|\/\/|\\|\\\\]/g).pop() // eslint-disable-line
-			const chunks = isDev ? fileChunk : ['manifest', 'vendors', fileChunk]
+			const chunks = isDev ? [ fileChunk ] : ['manifest', 'vendors', fileChunk]
 			return new HtmlWebpackPlugin({ filename, template, chunks })
 		})
 	]
