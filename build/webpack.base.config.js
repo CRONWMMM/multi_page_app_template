@@ -114,7 +114,8 @@ module.exports = {
 		// 打包文件
 		...glob.sync(resolve(__dirname, '../src/views/*.ejs')).map((filepath, i) => {
 			const tempList = filepath.split(/[\/|\/\/|\\|\\\\]/g) // eslint-disable-line
-			const filename = `${CONFIG.DIR.VIEW}/${tempList[tempList.length - 1]}`
+			// 读取 CONFIG.EXT 文件自定义的文件后缀名，默认生成 ejs 文件，可以定义生成 html 文件
+			const filename = (name => `${name.split('.')[0]}.${CONFIG.EXT}`)(`${CONFIG.DIR.VIEW}/${tempList[tempList.length - 1]}`)
 			const template = filepath
 			const fileChunk = filename.split('.')[0].split(/[\/|\/\/|\\|\\\\]/g).pop() // eslint-disable-line
 			const chunks = isDev ? [ fileChunk ] : ['manifest', 'vendors', fileChunk]

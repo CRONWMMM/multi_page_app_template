@@ -10,5 +10,6 @@
 		"SCRIPT": "js",
 		"FONT": "fonts",
 		"IMAGE": "imgs"
-	}
+	},
+	"EXT": "ejs"
 }
