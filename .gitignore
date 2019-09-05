@@ -11,3 +11,4 @@ devDist/
 dist/
 pc_dist/
 yarn.lock
+yarn-error.log
