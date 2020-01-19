@@ -7,8 +7,14 @@
 <body>
 	<div id="root">
 		<div class="trans-center">
-			<% include ./includes/img.ejs %>
-			<div class="welcome">Hello World!</div>
+			<% var welcomeText = 'Hello World!' %>
+			<% include includes/img.ejs %>
+			<% include includes/welcomeText.ejs %>
+			<div>
+				<%% if ( title == '首页' ) { %>
+					<p style="margin: 20px 0 20px">这是首页</p>
+				<%% } %>
+			</div>
 			<div class="github">
 				<span>By CRONWMMM - </span>
 				<a href="https://github.com/CRONWMMM/multi_page_app_template" class="link">GitHub</a>
