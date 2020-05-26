@@ -1,5 +1,6 @@
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const glob = require('glob')
 const { resolve } = require('path')
 const CONFIG = require('./config')
@@ -108,6 +109,13 @@ module.exports = {
 	},
 
 	plugins: [
+		new CopyWebpackPlugin([
+			{
+				from: resolve(__dirname, '../src/css/lib'),
+				to: resolve(__dirname, `../${CONFIG.DIR.DIST}/${CONFIG.DIR.STYLE}`),
+				writeToDisk: !isDev
+			}
+		]),
 		new webpack.ProvidePlugin({
 			$: 'jquery'
 		}),
